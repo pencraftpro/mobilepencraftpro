@@ -1,21 +1,22 @@
-// test/main_widget_test.dart
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pencraftpro/main.dart'; // adjust kung nasa ibang folder
+import 'package:pencraftpro/main.dart';
 
 void main() {
-  testWidgets('PenCraft Pro shows welcome screen with Get Started button', (
+  testWidgets('Shows Get Started button and tagline on MyHomePage', (
     WidgetTester tester,
   ) async {
-    // Render app
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(
+      const MaterialApp(home: MyHomePage(title: 'PenCraft Pro')),
+    );
 
-    // Wait for frames to settle
     await tester.pumpAndSettle();
 
-    // Expect to find "Get Started" button on /welcome
+    // Check "Get Started" button
     expect(find.text('Get Started'), findsOneWidget);
+    expect(find.byType(ElevatedButton), findsOneWidget);
+
+    // Check app tagline
+    expect(find.text('"Write It. Draw It. Own It."'), findsOneWidget);
   });
 }
